@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:checkable="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/navigation_set_temperature"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_set_temperature" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_settings" />
+
+</menu>
