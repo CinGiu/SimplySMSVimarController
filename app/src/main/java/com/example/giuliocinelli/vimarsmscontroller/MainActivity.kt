@@ -2,13 +2,15 @@ package com.example.giuliocinelli.vimarsmscontroller
 
 import android.Manifest
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import android.content.pm.PackageManager
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.giuliocinelli.vimarsmscontroller.fragment.SetTemperatureFragment
 import com.example.giuliocinelli.vimarsmscontroller.fragment.SettingsFragment
 import com.example.giuliocinelli.vimarsmscontroller.fragment.StatusFragment
@@ -20,9 +22,9 @@ class MainActivity : AppCompatActivity() {
     var setTemperatureFragment  = SetTemperatureFragment()
     var settingsFragment = SettingsFragment()
 
-    var active: android.support.v4.app.Fragment = homeFragment
+    var active: Fragment = homeFragment
 
-    private val fm : android.support.v4.app.FragmentManager = supportFragmentManager
+    private val fm : FragmentManager = supportFragmentManager
 
 
     private val _MY_PERMISSIONS_REQUEST_SEND_SMS = 0

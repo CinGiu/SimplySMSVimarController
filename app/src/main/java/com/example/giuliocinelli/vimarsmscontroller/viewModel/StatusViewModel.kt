@@ -1,6 +1,6 @@
 package com.example.giuliocinelli.vimarsmscontroller.viewModel
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 class StatusViewModel : ViewModel() {
 }
