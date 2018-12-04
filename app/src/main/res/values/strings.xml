@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VimarSMSController</string>
+    <string name="app_name">SMS Vimar</string>
     <string name="title_home">Stato</string>
     <string name="title_set_temperature">Set Temperatura</string>
     <string name="title_settings">Impostazioni</string>
