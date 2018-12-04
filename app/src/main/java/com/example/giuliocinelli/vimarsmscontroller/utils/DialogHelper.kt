@@ -17,10 +17,10 @@ class DialogHelper {
             builder.show()
         }
 
-        fun showSuccessDialog(error: String, context: Context){
+        fun showSuccessDialog(text: String, context: Context){
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Complimenti!")
-            builder.setMessage(error)
+            builder.setMessage(text)
 
             builder.setPositiveButton(android.R.string.yes) { _, _ ->
 
@@ -29,10 +29,10 @@ class DialogHelper {
             builder.show()
         }
 
-        fun showInfoDialog(error: String, context: Context){
+        fun showInfoDialog(text: String, context: Context){
             val builder = AlertDialog.Builder(context)
             builder.setTitle("")
-            builder.setMessage(error)
+            builder.setMessage(text)
 
             builder.setPositiveButton(android.R.string.yes) { _, _ ->
 
