@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.giuliocinelli.vimarsmscontroller.R
+import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper
 import com.example.giuliocinelli.vimarsmscontroller.utils.Prefs
 import com.example.giuliocinelli.vimarsmscontroller.viewModel.StatusViewModel
 
@@ -55,17 +56,18 @@ class StatusFragment : Fragment() {
         }
     }
 
-    fun sendCheckStatusMessage(){
+    private fun sendCheckStatusMessage(){
         val smsManager = SmsManager.getDefault()
 
         if (!prefs!!.isAllSettingSaved()){
+            DialogHelper.showErrorDialog("Non hai impostato il numero di telefono e gli altri campi nelle impostazioni!", activity!!)
             return
         }
 
         smsManager.sendTextMessage(prefs?.phoneNumber, null, generateMessage(), null, null)
     }
 
-    fun generateMessage(): String{
+    private fun generateMessage(): String{
         return "${prefs?.devicePassword}.${prefs?.deviceCode}.STATO"
     }
 

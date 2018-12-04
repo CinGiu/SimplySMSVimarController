@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import com.example.giuliocinelli.vimarsmscontroller.R
+import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper
 import com.example.giuliocinelli.vimarsmscontroller.utils.Prefs
 import com.example.giuliocinelli.vimarsmscontroller.viewModel.SettingsViewModel
 
@@ -76,26 +77,16 @@ class SettingsFragment : Fragment() {
 
         saveButton?.setOnClickListener {
             if (checkAllFields()){
-                prefs?.phoneNumber = passwordEditText?.text.toString()
+                prefs?.phoneNumber = phoneEditText?.text.toString()
                 prefs?.deviceCode = codeEditText?.text.toString()
                 prefs?.devicePassword = passwordEditText?.text.toString()
-
+                DialogHelper.showSuccessDialog("Impostazioni salvate con successo", activity!!)
             }else{
-                showErrorDialog("Devi compilare tutti i campi")
+               DialogHelper.showErrorDialog("Devi compilare tutti i campi", activity!!)
             }
         }
     }
 
-    private fun showErrorDialog(error: String){
-        val builder = AlertDialog.Builder(activity!!)
-        builder.setTitle("Attenzione!")
-        builder.setMessage(error)
 
-        builder.setPositiveButton(android.R.string.yes) { _, _ ->
-
-        }
-
-        builder.show()
-    }
 
 }

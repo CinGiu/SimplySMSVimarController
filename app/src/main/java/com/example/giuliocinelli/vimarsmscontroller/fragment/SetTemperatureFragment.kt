@@ -13,6 +13,9 @@ import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
 import com.example.giuliocinelli.vimarsmscontroller.R
+import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper
+import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper.Companion.showErrorDialog
+import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper.Companion.showSuccessDialog
 import com.example.giuliocinelli.vimarsmscontroller.viewModel.SendResult
 import com.example.giuliocinelli.vimarsmscontroller.viewModel.SetTemperatureViewModel
 
@@ -51,9 +54,10 @@ class SetTemperatureFragment : Fragment() {
         sendTemperatureButton = view?.findViewById(R.id.send_temperature_button)
         sendTemperatureButton?.setOnClickListener {
             when (viewModel.sendTemperature()){
-                SendResult.NoPhoneNumber -> showErrorDialog("Non hai inserito il numero di telefono nelle impostazioni!")
-                SendResult.NoCode -> showErrorDialog("Non hai inserito il CODICE DISPOSITIVO nelle impostazioni!")
-                SendResult.NoPassword -> showErrorDialog("Non hai inserito la password nelle impostazioni!")
+                SendResult.NoPhoneNumber -> showErrorDialog("Non hai inserito il numero di telefono nelle impostazioni!", activity!!)
+                SendResult.NoCode -> showErrorDialog("Non hai inserito il CODICE DISPOSITIVO nelle impostazioni!", activity!!)
+                SendResult.NoPassword -> showErrorDialog("Non hai inserito la password nelle impostazioni!", activity!!)
+                SendResult.NoError -> showSuccessDialog("Messaggio inviato correttamente", activity!!)
             }
         }
     }
@@ -81,17 +85,4 @@ class SetTemperatureFragment : Fragment() {
         })
         seekBar?.progress = viewModel.numericTemperature
     }
-
-    private fun showErrorDialog(error: String){
-        val builder = AlertDialog.Builder(activity!!)
-        builder.setTitle("Attenzione!")
-        builder.setMessage(error)
-
-        builder.setPositiveButton(android.R.string.yes) { _, _ ->
-
-        }
-
-        builder.show()
-    }
-
 }

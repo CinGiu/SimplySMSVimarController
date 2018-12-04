@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         askSMSPermission()
     }
 
-
     private fun askSMSPermission() {
 
         if (ContextCompat.checkSelfPermission(this,

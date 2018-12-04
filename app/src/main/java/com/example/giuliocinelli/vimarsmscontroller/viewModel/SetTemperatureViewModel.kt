@@ -54,7 +54,7 @@ class SetTemperatureViewModel : ViewModel() {
     }
 
     private fun generateMessage(): String{
-        return prefs.devicePassword+""+prefs.deviceCode+".MAN."+numericTemperature
+        return prefs.devicePassword+"."+prefs.deviceCode+".MAN."+numericTemperature
     }
 
     private fun getPhoneNumber(): String{
