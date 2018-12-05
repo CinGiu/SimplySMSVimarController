@@ -32,18 +32,15 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                fm.beginTransaction().hide(active).show(homeFragment).commit()
-                active = homeFragment
+                this.showHome()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_set_temperature -> {
-                fm.beginTransaction().hide(active).show(setTemperatureFragment).commit()
-                active = setTemperatureFragment
+                this.showSetTemperature()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                fm.beginTransaction().hide(active).show(settingsFragment).commit()
-                active = settingsFragment
+                this.showSettings()
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -56,12 +53,22 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         val navigation = findViewById<View>(R.id.navigation) as BottomNavigationView
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-        fm.beginTransaction().add(R.id.container, settingsFragment, "3").hide(settingsFragment).commit()
-        fm.beginTransaction().add(R.id.container, setTemperatureFragment, "2").hide(setTemperatureFragment).commit()
-        fm.beginTransaction().add(R.id.container, homeFragment, "1").commit()
-
+        if(savedInstanceState == null){
+            this.showHome()
+        }
         askSMSPermission()
+    }
+
+    private fun showHome(){
+        fm.beginTransaction().replace(R.id.container, homeFragment, "1").commit()
+    }
+
+    private fun showSettings(){
+        fm.beginTransaction().replace(R.id.container, settingsFragment, "3").commit()
+    }
+
+    private fun showSetTemperature(){
+        fm.beginTransaction().replace(R.id.container, setTemperatureFragment, "2").commit()
     }
 
     private fun askSMSPermission() {
