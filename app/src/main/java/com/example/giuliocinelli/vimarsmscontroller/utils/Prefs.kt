@@ -19,7 +19,7 @@ class Prefs (context: Context) {
 
     var phoneNumber: String
         get() = prefs.getString(_PHONE_NUMBER, "")
-        set(value) = prefs.edit().putString(_PHONE_NUMBER, value).apply()
+        set(value) = prefs.edit().putString(_PHONE_NUMBER, value.trim().replace(" ","")).apply()
 
     var deviceCode: String
         get() = prefs.getString(_DEVICE_CODE, "")

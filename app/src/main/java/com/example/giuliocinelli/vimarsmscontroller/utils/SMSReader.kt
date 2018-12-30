@@ -2,9 +2,6 @@ package com.example.giuliocinelli.vimarsmscontroller.utils
 
 import android.content.Context
 import android.net.Uri
-import androidx.lifecycle.ViewModelProviders
-import com.example.giuliocinelli.vimarsmscontroller.viewModel.StatusViewModel
-import java.util.*
 
 class SMSReader{
 
@@ -76,7 +73,4 @@ class SMSReader{
             return 0F
         }
     }
-
-
-
 }
