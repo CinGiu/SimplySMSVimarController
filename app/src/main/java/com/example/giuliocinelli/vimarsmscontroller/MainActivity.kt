@@ -88,7 +88,6 @@ class MainActivity : AppCompatActivity() {
                         _MY_PERMISSIONS_REQUEST_SEND_SMS)
             }
         }else{
-            //homeFragment.readSMS()
         }
 
     }
@@ -97,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         when (requestCode) {
             _MY_PERMISSIONS_REQUEST_SEND_SMS -> {
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //homeFragment.readSMS()
+
                 } else {
                     Toast.makeText(applicationContext,
                             "Devi garantire i permessi per inviare SMS da questa applicazione!", Toast.LENGTH_LONG).show()
