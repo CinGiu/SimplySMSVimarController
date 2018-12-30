@@ -12,6 +12,7 @@ import android.widget.EditText
 import com.example.giuliocinelli.vimarsmscontroller.R
 import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper
 import com.example.giuliocinelli.vimarsmscontroller.utils.Prefs
+import com.example.giuliocinelli.vimarsmscontroller.utils.SMSReader
 import com.example.giuliocinelli.vimarsmscontroller.viewModel.SettingsViewModel
 
 
@@ -81,6 +82,7 @@ class SettingsFragment : Fragment() {
                 prefs?.deviceCode = codeEditText?.text.toString()
                 prefs?.devicePassword = passwordEditText?.text.toString()
                 DialogHelper.showSuccessDialog("Impostazioni salvate con successo", activity!!)
+                SMSReader.syncSMS(activity!!.applicationContext)
             }else{
                DialogHelper.showErrorDialog("Devi compilare tutti i campi", activity!!)
             }

@@ -14,15 +14,16 @@ import androidx.fragment.app.FragmentManager
 import com.example.giuliocinelli.vimarsmscontroller.fragment.SetTemperatureFragment
 import com.example.giuliocinelli.vimarsmscontroller.fragment.SettingsFragment
 import com.example.giuliocinelli.vimarsmscontroller.fragment.StatusFragment
+import android.provider.Telephony.Sms
+import android.content.ContentResolver
+import android.net.Uri
 
 
 class MainActivity : AppCompatActivity() {
 
-    var homeFragment = StatusFragment()
-    var setTemperatureFragment  = SetTemperatureFragment()
-    var settingsFragment = SettingsFragment()
-
-    var active: Fragment = homeFragment
+    private var homeFragment = StatusFragment()
+    private var setTemperatureFragment  = SetTemperatureFragment()
+    private var settingsFragment = SettingsFragment()
 
     private val fm : FragmentManager = supportFragmentManager
 
@@ -73,23 +74,30 @@ class MainActivity : AppCompatActivity() {
 
     private fun askSMSPermission() {
 
-        if (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+        if (
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                             Manifest.permission.SEND_SMS)) {
             } else {
                 ActivityCompat.requestPermissions(this,
-                        arrayOf(Manifest.permission.SEND_SMS),
+                        arrayOf(Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS),
                         _MY_PERMISSIONS_REQUEST_SEND_SMS)
             }
+        }else{
+            //homeFragment.readSMS()
         }
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             _MY_PERMISSIONS_REQUEST_SEND_SMS -> {
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+                    //homeFragment.readSMS()
                 } else {
                     Toast.makeText(applicationContext,
                             "Devi garantire i permessi per inviare SMS da questa applicazione!", Toast.LENGTH_LONG).show()
@@ -99,5 +107,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 }

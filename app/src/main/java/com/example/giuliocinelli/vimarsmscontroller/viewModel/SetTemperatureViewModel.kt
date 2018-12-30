@@ -24,11 +24,11 @@ class SetTemperatureViewModel : ViewModel() {
     fun handlePreferences(context: Context){
         prefs = Prefs(context)
         _temperature.value = prefs.lastTemperature.toString() + " °C"
-        numericTemperature = prefs.lastTemperature
+        numericTemperature = prefs.lastTemperature.toInt()
     }
 
     fun setTemperature(i: Int){
-        prefs.lastTemperature = i
+        prefs.lastTemperature = i.toFloat()
         numericTemperature = i
         _temperature.value = i.toString() + " °C"
     }
