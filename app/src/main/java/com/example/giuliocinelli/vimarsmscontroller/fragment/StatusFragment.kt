@@ -1,5 +1,7 @@
 package com.example.giuliocinelli.vimarsmscontroller.fragment
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -13,6 +15,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.example.giuliocinelli.vimarsmscontroller.MainActivity
 import com.example.giuliocinelli.vimarsmscontroller.R
 import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper
 import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper.Companion.showErrorDialog
@@ -87,11 +92,12 @@ class StatusFragment : Fragment() {
             showErrorDialog("Non hai impostato il numero di telefono e gli altri campi nelle impostazioni!", activity!!)
             return
         }
-
-        smsManager.sendTextMessage(prefs?.phoneNumber, null, generateMessage(), null, null)
-        showSuccessDialog("Messaggio inviato con successo! \n\nAttendi qualche secondo per l'aggiornamento della temperatura.", activity!!)
-
-
+        if(ContextCompat.checkSelfPermission(this.context!!, "android.permission.READ_PHONE_STATE") == PackageManager.PERMISSION_GRANTED) {
+            smsManager.sendTextMessage(prefs?.phoneNumber, null, generateMessage(), null, null)
+            showSuccessDialog("Messaggio inviato con successo! \n\nAttendi qualche secondo per l'aggiornamento della temperatura.", activity!!)
+        }else{
+            showErrorDialog("Devi garantire i permessi di lettura e scrittura SMS all'app per utilizzarla.", context!!)
+        }
     }
 
     private fun generateMessage(): String{

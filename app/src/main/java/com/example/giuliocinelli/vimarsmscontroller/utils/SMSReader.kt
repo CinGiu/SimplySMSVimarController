@@ -1,7 +1,9 @@
 package com.example.giuliocinelli.vimarsmscontroller.utils
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.Uri
+import androidx.core.content.ContextCompat
 
 class SMSReader{
 
@@ -9,23 +11,27 @@ class SMSReader{
         lateinit var prefs : Prefs
 
         fun syncSMS(context: Context) {
+            if(ContextCompat.checkSelfPermission(context, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
+                val uriSms = Uri.parse("content://sms/inbox")
+                val cursor = context.contentResolver.query(uriSms, arrayOf("_id", "address", "date", "body"), null, null, "date DESC")
+                        ?: return
 
-            val uriSms = Uri.parse("content://sms/inbox")
-            val cursor = context.contentResolver.query(uriSms, arrayOf("_id", "address", "date", "body"), null, null, "date DESC")
-
-            if (cursor.count == 0) {
-                return
-            }
-            cursor!!.moveToFirst()
-            do {
-                val address = cursor.getString(1)
-                val date: Long = cursor.getLong(2)
-                val body = cursor.getString(3)
-                manageSMS(context, address, body, date)
-                if (prefs.lastTemperature != 0F && prefs.currentTemperature != 0F){
+                if (cursor.count == 0) {
                     return
                 }
-            } while (cursor.moveToNext())
+
+                cursor.moveToFirst()
+                do {
+                    val address = cursor.getString(1)
+                    val date: Long = cursor.getLong(2)
+                    val body = cursor.getString(3)
+                    manageSMS(context, address, body, date)
+                    if (prefs.lastTemperature != 0F && prefs.currentTemperature != 0F){
+                        return
+                    }
+                } while (cursor.moveToNext())
+            }
+
         }
 
         fun manageSMS(context: Context, address: String, body: String, date: Long){
@@ -44,6 +50,7 @@ class SMSReader{
 
             }
         }
+
         private fun parseSettedTemperature(msg: String): Float {
             val splittedBody = msg.split("\n")
             if (splittedBody.size <= 3) {

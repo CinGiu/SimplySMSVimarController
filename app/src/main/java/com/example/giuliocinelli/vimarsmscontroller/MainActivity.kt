@@ -78,13 +78,17 @@ class MainActivity : AppCompatActivity() {
                 ContextCompat.checkSelfPermission(this,
                         Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+                        Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                            Manifest.permission.SEND_SMS)) {
+                            Manifest.permission.SEND_SMS) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.READ_PHONE_STATE)) {
             } else {
                 ActivityCompat.requestPermissions(this,
-                        arrayOf(Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS),
+                        arrayOf(Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE),
                         _MY_PERMISSIONS_REQUEST_SEND_SMS)
             }
         }else{

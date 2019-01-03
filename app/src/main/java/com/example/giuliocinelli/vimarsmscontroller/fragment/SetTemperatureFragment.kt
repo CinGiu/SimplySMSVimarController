@@ -1,6 +1,7 @@
 package com.example.giuliocinelli.vimarsmscontroller.fragment
 
 
+import android.content.pm.PackageManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.giuliocinelli.vimarsmscontroller.R
 import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper
 import com.example.giuliocinelli.vimarsmscontroller.utils.DialogHelper.Companion.showErrorDialog
@@ -53,11 +55,12 @@ class SetTemperatureFragment : Fragment() {
     private fun setSendButton() {
         sendTemperatureButton = view?.findViewById(R.id.send_temperature_button)
         sendTemperatureButton?.setOnClickListener {
-            when (viewModel.sendTemperature()){
+            when (viewModel.sendTemperature(activity!!.applicationContext)){
                 SendResult.NoPhoneNumber -> showErrorDialog("Non hai inserito il numero di telefono nelle impostazioni!", activity!!)
                 SendResult.NoCode -> showErrorDialog("Non hai inserito il CODICE DISPOSITIVO nelle impostazioni!", activity!!)
                 SendResult.NoPassword -> showErrorDialog("Non hai inserito la password nelle impostazioni!", activity!!)
                 SendResult.NoError -> showSuccessDialog("Messaggio inviato correttamente", activity!!)
+                SendResult.NoPermissions -> showErrorDialog("Devi garantire i permessi di lettura e scrittura SMS all'app per utilizzarla.", activity!!)
             }
         }
     }
@@ -71,7 +74,9 @@ class SetTemperatureFragment : Fragment() {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
+
                 viewModel.setTemperature(i)
+
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
