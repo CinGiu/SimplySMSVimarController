@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="333444555666777"
+                android:hint="es. 333444555666777"
                 android:inputType="phone"
                 android:textAlignment="center" />
 
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="C1"
+                android:hint="es. C1"
                 android:inputType="textPersonName"
                 android:textAlignment="center" />
 
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="1234"
+                android:hint="es. 1234"
                 android:inputType="textNoSuggestions|textPersonName"
                 android:textAlignment="center" />
         </LinearLayout>

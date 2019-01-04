@@ -30,6 +30,7 @@ import com.example.giuliocinelli.vimarsmscontroller.viewModel.StatusViewModel
 class StatusFragment : Fragment() {
 
     var temperatureStatusEditText: TextView? = null
+    var temperatureSettedEditText: TextView? = null
     var lastCheckEditText: TextView? = null
     var checkButton: Button? = null
     private var prefs: Prefs? = null
@@ -72,8 +73,11 @@ class StatusFragment : Fragment() {
 
     private fun setTextViews(){
         temperatureStatusEditText = view?.findViewById(R.id.temperature_status)
+        temperatureSettedEditText = view?.findViewById(R.id.temperature_setted)
         lastCheckEditText = view?.findViewById(R.id.last_check)
+
         temperatureStatusEditText?.text = prefs!!.currentTemperature.toString() + " °C"
+        temperatureSettedEditText?.text = prefs!!.lastTemperature.toString() + "° C"
         lastCheckEditText?.text = "Dato aggiornato al\n"+prefs!!.lastTimeChecked
     }
 
